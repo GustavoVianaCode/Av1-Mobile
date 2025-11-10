@@ -40,6 +40,11 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.foundation.background
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
+import androidx.compose.foundation.shape.RoundedCornerShape
 import com.example.melhordtodos.ui.theme.MelhorDtodosTheme
 import android.widget.Toast
 
@@ -72,7 +77,17 @@ fun LoginCompose(onEnterClick: (User) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(horizontal = 16.dp), // padding lateral
+            .background(
+                brush = Brush.run {
+                    verticalGradient(
+                                colors = listOf(
+                                    Color(0xFF010814),
+                                    Color(0xFF02173B)
+                                )
+                            )
+                }
+            )
+            .padding(horizontal = 16.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -82,36 +97,72 @@ fun LoginCompose(onEnterClick: (User) -> Unit) {
             fontWeight = FontWeight.Bold,
             fontFamily = FontFamily.Serif,
             lineHeight = 40.sp,
-            text = "Bem vindo ao Melhor de Todos"
+            text = "Bem vindo ao Melhor de Todos",
+            color = Color(0xFFFFFFFFF)
         )
 
-        TextField(
-            value = username, onValueChange = { newValue ->
+        OutlinedTextField(
+            value = username,
+            onValueChange = { newValue ->
                 username = newValue
-            }, Modifier
+            },
+            modifier = Modifier
                 .padding(8.dp)
-                .fillMaxWidth(), label = {
+                .fillMaxWidth(),
+            label = {
                 Text("Usuário", fontSize = 20.sp)
-            }, leadingIcon = {
+            },
+            leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Person,
                     contentDescription = "Usuário"
                 )
-            })
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedBorderColor = Color(0xFF89CFF0),  // Azul do gradiente
+                unfocusedBorderColor = Color.White.copy(alpha = 0.7f),
+                focusedLabelColor = Color(0xFF89CFF0),
+                unfocusedLabelColor = Color.White.copy(alpha = 0.8f),
+                focusedTextColor = Color(0xFF333333),
+                unfocusedTextColor = Color(0xFF333333),
+                cursorColor = Color(0xFF89CFF0)
+            ),
+            shape = RoundedCornerShape(12.dp)  // Bordas arredondadas
+        )
 
-        TextField(
-            value = password, onValueChange = {
+        OutlinedTextField(
+            value = password,
+            onValueChange = {
                 password = it
-            }, Modifier
+            },
+            modifier = Modifier
                 .padding(8.dp)
-                .fillMaxWidth(), label = {
+                .fillMaxWidth(),
+            label = {
                 Text("Senha", fontSize = 20.sp)
-            }, visualTransformation = PasswordVisualTransformation(), leadingIcon = {
+            },
+            visualTransformation = PasswordVisualTransformation(),
+            leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
                     contentDescription = "Senha"
                 )
-            })
+            },
+            colors = OutlinedTextFieldDefaults.colors(
+                focusedContainerColor = Color.Transparent,
+                unfocusedContainerColor = Color.Transparent,
+                focusedBorderColor = Color(0xFFFFB347),  // Laranja do gradiente
+                unfocusedBorderColor = Color.White.copy(alpha = 0.7f),
+                focusedLabelColor = Color(0xFFFFB347),
+                unfocusedLabelColor = Color.White.copy(alpha = 0.8f),
+                focusedTextColor = Color(0xFF333333),
+                unfocusedTextColor = Color(0xFF333333),
+                cursorColor = Color(0xFFFFB347)
+            ),
+            shape = RoundedCornerShape(12.dp)
+        )
 
         ElevatedButton(
             onClick = {
@@ -121,8 +172,8 @@ fun LoginCompose(onEnterClick: (User) -> Unit) {
                 .padding(8.dp)
                 .fillMaxWidth(),
             colors = ButtonDefaults.elevatedButtonColors(
-                containerColor = Color(0xFF1E88E5),
-                contentColor = Color.White
+                containerColor = Color(0xFF335CDE),
+                contentColor = Color(color = 0xFF333333)
             )
         ) {
             Text("Entrar", fontSize = 20.sp)
@@ -133,8 +184,8 @@ fun LoginCompose(onEnterClick: (User) -> Unit) {
                 .padding(8.dp, 0.dp)
                 .fillMaxWidth(),
             colors = ButtonDefaults.outlinedButtonColors(
-                containerColor = Color(0xFF1E88E5),
-                contentColor = Color.White
+                containerColor = Color(0xFF335CDE),
+                contentColor = Color(color = 0xFF333333)
             )
         ){
             Text("Criar conta", fontSize = 20.sp)

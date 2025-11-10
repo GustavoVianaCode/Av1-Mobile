@@ -1,13 +1,12 @@
 package com.example.melhordtodos
 
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.melhordtodos.ui.theme.MelhorDtodosTheme
-
+//import com.example.melhordtodos.ui.theme.MelhorDtodosTheme
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
@@ -20,10 +19,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-//import com.example.melhordtodos.ui.theme.MelhorDtodosTheme
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.material3.ButtonDefaults
+import com.example.melhordtodos.ui.theme.MelhorDtodosTheme
 import kotlin.random.Random
+
 
 class MelhorDeTodosActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -83,7 +86,16 @@ fun Milhor(modifier: Modifier = Modifier, userName: String) {
     var sorteado by remember { mutableStateOf<String?>(null) }
 
     Column(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFF010814),
+                        Color(0xFF02173B)
+                    )
+                )
+            ),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(36.dp))
@@ -92,6 +104,7 @@ fun Milhor(modifier: Modifier = Modifier, userName: String) {
             text = "Salve, $userName!",
             fontWeight = FontWeight.Bold,
             fontSize = 20.sp,
+            color = Color(0xFFE9EDFB),
             modifier = Modifier.padding(top = 16.dp, bottom = 8.dp)
         )
 
@@ -102,6 +115,7 @@ fun Milhor(modifier: Modifier = Modifier, userName: String) {
             fontWeight = FontWeight.SemiBold,
             fontSize = 18.sp,
             textAlign = TextAlign.Center,
+            color = Color(0xFFE9EDFB),
             style = MaterialTheme.typography.titleMedium,
             lineHeight = 22.sp,
             modifier = Modifier.padding(top = 8.dp, bottom = 16.dp)
@@ -114,6 +128,7 @@ fun Milhor(modifier: Modifier = Modifier, userName: String) {
             fontSize = 18.sp,
             textAlign = TextAlign.Center,
             fontWeight = FontWeight.Medium,
+            color = Color(0xFFE9EDFB),
             modifier = Modifier
                 .fillMaxWidth(0.9f)
                 .padding(bottom = 16.dp)
@@ -121,10 +136,16 @@ fun Milhor(modifier: Modifier = Modifier, userName: String) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        Button(onClick = {
-            val id = Random.nextInt(melhores.size)
-            sorteado = melhores[id]
-        }) {
+        Button(
+            onClick = {
+                val id = Random.nextInt(melhores.size)
+                sorteado = melhores[id]
+            },
+            colors = ButtonDefaults.buttonColors(
+                containerColor = Color(0xFF335CDE),
+                contentColor = Color.White
+            )
+        ) {
             Text(
                 text = "E o novo G.U.I.L.H.E.R.M.E é?",
                 fontSize = 17.sp,
@@ -158,7 +179,7 @@ fun Milhor(modifier: Modifier = Modifier, userName: String) {
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.Center,
-                color = Color(0xFF1E88E5),
+                color = Color(0xFFE9EDFB),
                 modifier = Modifier.fillMaxWidth()
             )
         }
